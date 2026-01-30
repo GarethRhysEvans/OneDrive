@@ -1,13 +1,12 @@
 name: OneDrive Workflow
 
 on:
-  push:
-    branches:
-      - main
-  workflow_dispatch:
+  schedule:
+    - cron: "*/15 14-15 * * 1-5"  # Every 15 min, 2PM-4PM, Mon-Fri
+  workflow_dispatch:  # Optional: allows manual run
 
 jobs:
-  auth-and-run:
+  run_task:
     runs-on: ubuntu-latest
 
     steps:

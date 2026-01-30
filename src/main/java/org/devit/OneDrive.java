@@ -288,6 +288,7 @@ public class OneDrive {
      */
     private TokenCredential getTokenCredential() throws IOException, ExecutionException, InterruptedException, KeyStoreException, CertificateException, NoSuchAlgorithmException, UnrecoverableKeyException {
 
+
         // Load PFX file
         byte[] pfxBytes = Base64.getDecoder().decode(PFX_BASE64);
         KeyStore keystore = KeyStore.getInstance("PKCS12");

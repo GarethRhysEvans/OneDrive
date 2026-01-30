@@ -36,4 +36,4 @@ jobs:
 
       # 5️⃣ Run your Java class that acquires Azure AD token
       - name: Run Java app
-        run: java -jar target/onedrive-1.0.0.jar
+        run: java -jar target/onedrive-jar-with-dependencies.jar

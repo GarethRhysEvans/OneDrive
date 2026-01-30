@@ -34,5 +34,4 @@ jobs:
           AZURE_CERT_PFX_BASE64: ${{ secrets.AZURE_CERT_PFX_BASE64 }}
           AZURE_CERT_PASSWORD: ${{ secrets.AZURE_CERT_PFX_PASSWORD }}
           USER_ID: ${{ secrets.USER_ID }}
-          
-    run: java -jar target/onedrive-jar-with-dependencies.jar
+        run: java -jar target/onedrive-jar-with-dependencies.jar

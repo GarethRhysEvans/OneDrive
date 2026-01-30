@@ -5,7 +5,7 @@ on:
     branches:
       - main  # Or whichever branch you want to watch
   schedule:
-    - cron: "*/15 14-15 * * 1-5"  # Every 15 min, 2PM-4PM, Mon-Fri
+    - cron: "*/15 14-17 * * 1-5"  # Every 15 min, 2PM-5PM, Mon-Fri
   workflow_dispatch:  # Optional: allows manual run
 
 jobs:

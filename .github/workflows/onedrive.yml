@@ -36,4 +36,4 @@ jobs:
 
       # 5️⃣ Run your Java class that acquires Azure AD token
       - name: Run Java app
-        run: java -cp target/myapp.jar org.devit.Test
+        run: java -cp target/onedrive.jar org.devit.Test

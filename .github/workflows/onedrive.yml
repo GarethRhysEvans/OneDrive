@@ -22,11 +22,11 @@ jobs:
           distribution: temurin
           java-version: '17'  # or your required version
 
-      # 4️⃣ Build Java project (Maven example)
+      # 3⃣ Build Java project (Maven example)
       - name: Build with Maven
         run: mvn clean package
 
-      # 5️⃣ Run your Java class that acquires Azure AD token
+      # 4 Run your Java class that acquires Azure AD token
       - name: Run Java app
         env:
           AZURE_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}

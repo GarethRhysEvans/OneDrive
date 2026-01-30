@@ -22,18 +22,15 @@ jobs:
           distribution: temurin
           java-version: '17'  # or your required version
 
-      # 3️⃣ Export secrets as environment variables
-      - name: Set environment variables
-        run: |
-          echo "AZURE_TENANT_ID=${{ secrets.AZURE_TENANT_ID }}" >> $GITHUB_ENV
-          echo "AZURE_CLIENT_ID=${{ secrets.AZURE_CLIENT_ID }}" >> $GITHUB_ENV
-          echo "AZURE_CERT_PFX_BASE64=${{ secrets.AZURE_CERT_PFX_BASE64 }}" >> $GITHUB_ENV
-          echo "AZURE_CERT_PASSWORD=${{ secrets.AZURE_CERT_PASSWORD }}" >> $GITHUB_ENV
-
       # 4️⃣ Build Java project (Maven example)
       - name: Build with Maven
         run: mvn clean package
 
       # 5️⃣ Run your Java class that acquires Azure AD token
       - name: Run Java app
+        env:
+          AZURE_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+          AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
+          AZURE_CERT_PFX_BASE64: ${{ secrets.AZURE_CERT_PFX_BASE64 }}
+          AZURE_CERT_PASSWORD: ${{ secrets.AZURE_CERT_PFX_PASSWORD }}
         run: java -jar target/onedrive-jar-with-dependencies.jar

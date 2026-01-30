@@ -62,6 +62,8 @@ public class OneDrive {
 
         this.driveId = getDriveId();
 
+        logger.info("DriveId: {}", this.driveId );
+
     }
 
 

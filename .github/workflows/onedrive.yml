@@ -1,14 +1,11 @@
 name: OneDrive Workflow
 
 on:
-  push:
-    branches:
-      - main  # Or whichever branch you want to watch
   repository_dispatch:
     types: [run-mission-critical-job]
 
 jobs:
-  run_task:
+  execute:
     runs-on: ubuntu-latest
 
     steps:

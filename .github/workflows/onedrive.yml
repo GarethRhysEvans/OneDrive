@@ -1,0 +1,39 @@
+name: OneDrive Workflow
+
+on:
+  push:
+    branches:
+      - main  # Or whichever branch you want to watch
+  schedule:
+    - cron: "*/15 10-17 * * 1-5"  # Every 15 min, 2PM-5PM, Mon-Fri
+  workflow_dispatch:  # Optional: allows manual run
+
+jobs:
+  run_task:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1️⃣ Checkout repo
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # 2️⃣ Set up Java
+      - name: Set up Java
+        uses: actions/setup-java@v3
+        with:
+          distribution: temurin
+          java-version: '17'  # or your required version
+
+      # 3⃣ Build Java project (Maven example)
+      - name: Build with Maven
+        run: mvn clean package
+
+      # 4 Run your Java class that acquires Azure AD token
+      - name: Run Java app
+        env:
+          AZURE_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+          AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
+          AZURE_CERT_PFX_BASE64: ${{ secrets.AZURE_CERT_PFX_BASE64 }}
+          AZURE_CERT_PASSWORD: ${{ secrets.AZURE_CERT_PFX_PASSWORD }}
+          USER_ID: ${{ secrets.USER_ID }}
+        run: java -jar target/onedrive-jar-with-dependencies.jar

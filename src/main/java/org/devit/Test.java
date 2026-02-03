@@ -11,17 +11,26 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
+/**
+ * A simple test to download a CSV file from OneDrive, update its contents with the current date and time, and then
+ * upload it to verify the reliability of scheduled workflow actions.
+ *
+ * So far scheduled workflow actions are unreliable - so, I'm now testing using cron-job.org using repository_dispatch
+ */
 public class Test {
     private static final Logger logger = LoggerFactory.getLogger(Test.class);
+
 
     public static void main(String[] args) {
 
         try {
 
-            OneDrive onedrive = new OneDrive();
-
             // Download File
-            onedrive.download("Test", "test.csv", ".");
+            new DriveFileService.Builder()
+                    .setFolderPath("Test")
+                    .setFileName("test.csv")
+                    .setLocalPath(".")
+                    .build().download();
 
             // Load the CSV file
             CSVReader reader = new CSVReader(new FileReader("test.csv"));
@@ -60,7 +69,11 @@ public class Test {
             writer.close();
 
             // Upload the csv file
-            onedrive.upload("./test.csv", "Test");
+            new DriveFileService.Builder()
+                    .setFolderPath("Test")
+                    .setLocalFile("./test.csv")
+                    .build().upload();
+
 
         } catch (Exception e) {
             logger.error("Test Error", e);
